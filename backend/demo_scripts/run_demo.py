@@ -106,9 +106,29 @@ async def run(script_name: str, base_url: str) -> None:
     normalized_base = base_url.rstrip("/")
     start_url = f"{normalized_base}/session/start"
     async with httpx.AsyncClient(timeout=20.0) as client:
-        response = await client.post(start_url, json={"language": "auto", "is_practice": True})
+        is_critical_demo = script_name.startswith("critical")
+        start_payload = {
+            "language": "hi" if script_name.endswith("_hi") else "en",
+            "is_practice": True,
+        }
+        if is_critical_demo:
+            # This is a fictional, local-only reputation signal so the demo
+            # exercises caller context as well as the transcript pipeline.
+            start_payload["caller_phone"] = "+910000000000"
+        response = await client.post(start_url, json=start_payload)
         response.raise_for_status()
         session_id = str(response.json()["session_id"])
+        if is_critical_demo:
+            report = await client.post(
+                f"{normalized_base}/community-report",
+                json={
+                    "phone_number": "+910000000000",
+                    "category": "financial_fraud",
+                    "note": "Fictional demo signal for testing only.",
+                    "session_id": session_id,
+                },
+            )
+            report.raise_for_status()
 
     websocket_base = normalized_base.replace("https://", "wss://", 1).replace("http://", "ws://", 1)
     websocket_url = f"{websocket_base}/ws/call/{session_id}"
