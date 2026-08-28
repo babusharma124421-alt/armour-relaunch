@@ -50,7 +50,6 @@ function fallbackPracticePayloads(script: string): RiskPayload[] {
   const critical = /(cbi|aadhaar|money laundering|arrest|otp|safe account|गिरफ्तार|ओटीपी)/u.test(normalized)
   const medium = /(sim|deactivat|kyc|सिम|केवाईसी)/u.test(normalized)
   const finalScore = critical ? 88 : medium ? 48 : 12
-  const verdict: Verdict = finalScore > 70 ? 'CRITICAL' : finalScore >= 30 ? 'SUSPICIOUS' : 'SAFE'
   const matchedPatterns = critical
     ? ['authority_claim_en', 'arrest_threat_en', 'money_transfer_en', 'secrecy_request_en']
     : medium
