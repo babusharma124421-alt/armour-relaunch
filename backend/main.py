@@ -44,7 +44,12 @@ try:
     from .services.alerts import AlertService
     from .services.behavior import BehaviorScoringService
     from .services.context import CallerContextService
-    from .services.fusion import FusionService, reason_key_to_display_string
+    from .services.fusion import (
+        FusionService,
+        LLM_BLEND_WEIGHT,
+        SCRIPT_BLEND_WEIGHT,
+        reason_key_to_display_string,
+    )
     from .services.intent import IntentAnalysisService
     from .services.script_scanner import ScriptScannerService
     from .services.voice import VoiceAuthenticityService
@@ -74,7 +79,12 @@ except ImportError:  # Supports `uvicorn main:app` from the backend directory.
     from services.alerts import AlertService
     from services.behavior import BehaviorScoringService
     from services.context import CallerContextService
-    from services.fusion import FusionService, reason_key_to_display_string
+    from services.fusion import (
+        FusionService,
+        LLM_BLEND_WEIGHT,
+        SCRIPT_BLEND_WEIGHT,
+        reason_key_to_display_string,
+    )
     from services.intent import IntentAnalysisService
     from services.script_scanner import ScriptScannerService
     from services.voice import VoiceAuthenticityService
@@ -446,6 +456,11 @@ async def call_websocket(websocket: WebSocket, session_id: str) -> None:
             intent_result.detected_patterns = list(
                 dict.fromkeys(script_result.matched_patterns + intent_result.detected_patterns)
             )
+            combined_intent_score = (
+                SCRIPT_BLEND_WEIGHT * script_result.script_score
+                + LLM_BLEND_WEIGHT * intent_result.llm_intent_score
+            )
+            session_state["combined_intent_score"] = combined_intent_score
             snippet = transcript[-280:]
             if snippet:
                 session_state["transcript_history"].append(snippet)
