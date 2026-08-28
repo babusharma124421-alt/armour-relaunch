@@ -1,0 +1,6 @@
+# FICTIONAL DEMO SCRIPT — FOR TESTING ONLY
+# NOT A REAL CALL. DO NOT USE AS TRAINING DATA.
+
+Hello, I am calling from the telecom department about the KYC record for your mobile connection. Our system shows that the SIM will be deactivated if the record is not reviewed soon.
+
+Please stay on the line while I explain the steps. There is no payment needed during this call, and you should not share an OTP or PIN. You can independently verify the notice using your provider's official app or website before taking any action.

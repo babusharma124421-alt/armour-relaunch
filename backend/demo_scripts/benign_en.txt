@@ -1,0 +1,6 @@
+# FICTIONAL DEMO SCRIPT — FOR TESTING ONLY
+# NOT A REAL CALL. DO NOT USE AS TRAINING DATA.
+
+Hello, this is Priya calling from the customer care team at Example Bank. I am calling about a routine service-quality survey on your account. I will not ask for your password, PIN, or one-time password.
+
+If you would like to verify this call, please hang up and use the official number printed on your bank card or the bank's official website. You may also call our published customer-care number back when convenient. Thank you for your time, and have a safe day.
