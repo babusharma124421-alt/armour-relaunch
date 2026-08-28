@@ -44,7 +44,7 @@ try:
     from .services.alerts import AlertService
     from .services.behavior import BehaviorScoringService
     from .services.context import CallerContextService
-    from .services.fusion import FusionService
+    from .services.fusion import FusionService, reason_key_to_display_string
     from .services.intent import IntentAnalysisService
     from .services.script_scanner import ScriptScannerService
     from .services.voice import VoiceAuthenticityService
@@ -79,11 +79,6 @@ except ImportError:  # Supports `uvicorn main:app` from the backend directory.
     from services.script_scanner import ScriptScannerService
     from services.voice import VoiceAuthenticityService
     from storage import DatabaseRepository, create_supabase_client
-
-try:
-    from .services.fusion import reason_key_to_display_string
-except ImportError:  # pragma: no cover - top-level import already handled above
-    pass
 
 LOGGER = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parent

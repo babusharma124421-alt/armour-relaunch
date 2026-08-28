@@ -94,9 +94,10 @@ if TORCH_AVAILABLE:
 else:
 
     class RawNet2Architecture:  # type: ignore[no-redef]
-        """Import-safe placeholder type when torch is not installed."""
+        """Fail clearly if a model is requested without the torch dependency."""
 
-        pass
+        def __init__(self) -> None:
+            raise RuntimeError("RawNet2 requires the torch dependency")
 
 
 class VoiceAuthenticityService:
