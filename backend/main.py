@@ -308,12 +308,15 @@ async def community_report(
 
     if await app.state.repository.get_session(payload.session_id) is None:
         raise HTTPException(status_code=404, detail="Session not found")
-    await app.state.context_service.submit_community_report(
+    caller_result = await app.state.context_service.submit_community_report(
         payload.phone_number,
         payload.category,
         payload.note,
         payload.session_id,
     )
+    # Make a report submitted during an active session immediately visible to
+    # that session's caller-context score without retaining the raw number.
+    app.state.caller_cache[payload.session_id] = caller_result
     return CommunityReportResponse(success=True, message="Report submitted. Thank you.")
 
 
