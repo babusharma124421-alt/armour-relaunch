@@ -1,0 +1,44 @@
+[
+  {
+    "id": "benign_en",
+    "risk": "benign",
+    "language": "en",
+    "titleKey": "practice.benign",
+    "text": "Hello, this is Priya calling from the customer care team at Example Bank. I am calling about a routine service-quality survey on your account. I will not ask for your password, PIN, or one-time password. If you would like to verify this call, please hang up and use the official number printed on your bank card or the bank's official website."
+  },
+  {
+    "id": "benign_hi",
+    "risk": "benign",
+    "language": "hi",
+    "titleKey": "practice.benign",
+    "text": "नमस्ते, मैं उदाहरण बैंक की ग्राहक सेवा टीम से प्रिया बोल रही हूँ। यह आपके खाते से जुड़ा एक सामान्य सेवा सर्वेक्षण है। मैं आपसे पासवर्ड, पिन या ओटीपी नहीं पूछूंगी। पुष्टि करने के लिए फोन काटकर अपने बैंक कार्ड पर लिखे आधिकारिक नंबर या बैंक की वेबसाइट से नंबर लेकर वापस संपर्क करें।"
+  },
+  {
+    "id": "medium_en",
+    "risk": "medium",
+    "language": "en",
+    "titleKey": "practice.medium",
+    "text": "Hello, I am calling from the telecom department about the KYC record for your mobile connection. Our system shows that the SIM will be deactivated if the record is not reviewed soon. Please stay on the line while I explain the steps. There is no payment needed, and you should not share an OTP or PIN."
+  },
+  {
+    "id": "medium_hi",
+    "risk": "medium",
+    "language": "hi",
+    "titleKey": "practice.medium",
+    "text": "नमस्ते, मैं टेलीकॉम विभाग से बोल रहा हूँ। आपके मोबाइल कनेक्शन के केवाईसी रिकॉर्ड में समस्या दिख रही है और इसे जल्दी ठीक नहीं किया गया तो सिम बंद हो सकती है। कृपया लाइन पर रहिए। कोई भुगतान जरूरी नहीं है और आपको ओटीपी या पिन साझा नहीं करना चाहिए।"
+  },
+  {
+    "id": "critical_en",
+    "risk": "critical",
+    "language": "en",
+    "titleKey": "practice.critical",
+    "text": "This is an officer from the CBI cyber cell. Your Aadhaar and bank account are linked to a money laundering and drug trafficking case. There is an arrest warrant and a criminal case against you. This is the last warning, so stay on the video call and do not disconnect or tell anyone. Transfer your money to this safe account immediately and tell me your OTP."
+  },
+  {
+    "id": "critical_hi",
+    "risk": "critical",
+    "language": "hi",
+    "titleKey": "practice.critical",
+    "text": "मैं सीबीआई साइबर सेल का अधिकारी बोल रहा हूँ। आपका आधार और बैंक खाता मनी लॉन्ड्रिंग और ड्रग तस्करी के अपराध से जुड़ा है। आपके खिलाफ गिरफ्तारी वारंट और मुकदमा दर्ज है। यह अंतिम चेतावनी है, इसलिए वीडियो कॉल पर रहिए, फोन मत काटिए और किसी को मत बताइए। तुरंत पैसे सुरक्षित खाते में ट्रांसफर कीजिए और अपना ओटीपी बताइए।"
+  }
+]
