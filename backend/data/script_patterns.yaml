@@ -1,0 +1,105 @@
+patterns:
+  - id: "authority_claim_en"
+    weight: 0.9
+    regex: '(?i)\b(CBI|police|cyber cell|RBI|income tax|customs|narcotics|enforcement directorate|official|officer|inspector|commissioner|court|judiciary|bank manager|government)\b'
+    category: "authority_impersonation"
+  - id: "authority_claim_hi"
+    weight: 0.9
+    regex: '(पुलिस|सीबीआई|आयकर|सरकारी|अधिकारी|इंस्पेक्टर|अदालत|न्यायालय|बैंक अधिकारी|साइबर सेल|कस्टम्स|प्रवर्तन निदेशालय|CBI|RBI)'
+    category: "authority_impersonation"
+  - id: "arrest_threat_en"
+    weight: 1.0
+    regex: '(?i)\b(arrest warrant|arrest you|FIR|criminal case|non-bailable|custody|detained|summons|jail|go to prison)\b'
+    category: "threat_language"
+  - id: "arrest_threat_hi"
+    weight: 1.0
+    regex: '(गिरफ्तारी|गिरफ्तार|वारंट|एफआईआर|मुकदमा|हिरासत|जेल|नॉन-बेलेबल|समन)'
+    category: "threat_language"
+  - id: "secrecy_request_en"
+    weight: 0.85
+    regex: "(?i)(don't disconnect|don't hang up|keep this confidential|don't tell anyone|secret|stay on the line|do not inform|nobody else should know)"
+    category: "secrecy_pressure"
+  - id: "secrecy_request_hi"
+    weight: 0.85
+    regex: '(किसी को मत बताना|फोन मत काटना|गुप्त रखो|गुप्त|किसी को नहीं बताना|confidential|secret रखो|लाइन पर रहो)'
+    category: "secrecy_pressure"
+  - id: "money_transfer_en"
+    weight: 1.0
+    regex: '(?i)\b(transfer|send money|NEFT|IMPS|UPI|pay|deposit|account number|OTP|PIN|CVV|share your OTP|give OTP|safe account)\b'
+    category: "financial_request"
+  - id: "money_transfer_hi"
+    weight: 1.0
+    regex: '(पैसे भेजो|पैसे ट्रांसफर|ट्रांसफर|OTP बताओ|ओटीपी|खाता नंबर|UPI|NEFT|जमा करो|सुरक्षित खाते में|पिन बताओ)'
+    category: "financial_request"
+  - id: "aadhaar_crime_link_en"
+    weight: 0.95
+    regex: '(?i)(your Aadhaar|your account|linked to (a )?crime|money laundering|drug trafficking|illegal transaction|suspicious activity|criminal proceeds)'
+    category: "false_accusation"
+  - id: "aadhaar_crime_link_hi"
+    weight: 0.95
+    regex: '(आधार.*अपराध|खाता.*अपराध|मनी लॉन्ड्रिंग|अवैध लेनदेन|संदिग्ध|ड्रग तस्करी|अपराध से जुड़ा)'
+    category: "false_accusation"
+  - id: "video_call_trap_en"
+    weight: 0.8
+    regex: '(?i)(stay on video call|don.t turn off camera|video call.*mandatory|appear before|keep your camera on|digital arrest)'
+    category: "digital_arrest"
+  - id: "video_call_trap_hi"
+    weight: 0.8
+    regex: '(वीडियो कॉल|कैमरा बंद मत करो|डिजिटल अरेस्ट|वीडियो पर रहो|कैमरा चालू रखो)'
+    category: "digital_arrest"
+  - id: "remote_access_en"
+    weight: 0.9
+    regex: '(?i)(AnyDesk|TeamViewer|remote access|install this app|screen share|download.*app|remote control)'
+    category: "remote_access"
+  - id: "remote_access_hi"
+    weight: 0.9
+    regex: '(ऐनीडेस्क|टीमव्यूअर|रिमोट एक्सेस|ऐप इंस्टॉल|स्क्रीन शेयर|ऐप डाउनलोड|दूर से नियंत्रण)'
+    category: "remote_access"
+  - id: "urgency_deadline_en"
+    weight: 0.8
+    regex: '(?i)\b(immediately|right now|urgent|within one hour|last warning|before midnight|act now|deadline|quickly)\b'
+    category: "urgency_pressure"
+  - id: "urgency_deadline_hi"
+    weight: 0.8
+    regex: '(तुरंत|अभी|बहुत जरूरी|एक घंटे के अंदर|अंतिम चेतावनी|आज ही|जल्दी करो|समय सीमा)'
+    category: "urgency_pressure"
+  - id: "identity_data_request_en"
+    weight: 0.9
+    regex: '(?i)(date of birth|Aadhaar number|PAN number|card number|bank details|personal details|full KYC|date of birth)'
+    category: "data_extraction"
+  - id: "identity_data_request_hi"
+    weight: 0.9
+    regex: '(जन्म तिथि|आधार नंबर|पैन नंबर|कार्ड नंबर|बैंक की जानकारी|व्यक्तिगत जानकारी|केवाईसी)'
+    category: "data_extraction"
+  - id: "otp_request_en"
+    weight: 1.0
+    regex: '(?i)\b(verification code|one[- ]time password|OTP|six digit code|tell me the code)\b'
+    category: "credential_theft"
+  - id: "otp_request_hi"
+    weight: 1.0
+    regex: '(ओटीपी|वन टाइम पासवर्ड|वेरिफिकेशन कोड|छह अंकों का कोड|कोड बताइए)'
+    category: "credential_theft"
+  - id: "sim_deactivation_en"
+    weight: 0.65
+    regex: '(?i)(SIM will be deactivated|SIM deactivation|mobile number blocked|KYC expiry|disconnect your SIM|telecom department)'
+    category: "telecom_impersonation"
+  - id: "sim_deactivation_hi"
+    weight: 0.65
+    regex: '(सिम बंद|सिम डिएक्टिवेट|मोबाइल नंबर बंद|केवाईसी खत्म|टेलीकॉम विभाग|सिम कट जाएगा)'
+    category: "telecom_impersonation"
+  - id: "prize_lottery_en"
+    weight: 0.75
+    regex: '(?i)(you have won|lottery|prize money|processing fee|claim your reward|lucky draw)'
+    category: "financial_fraud"
+  - id: "prize_lottery_hi"
+    weight: 0.75
+    regex: '(लॉटरी|इनाम|पुरस्कार राशि|प्रोसेसिंग फीस|आप जीत गए|लकी ड्रॉ)'
+    category: "financial_fraud"
+  - id: "impersonation_identity_en"
+    weight: 0.8
+    regex: '(?i)(I am calling from|speaking on behalf of|officially calling|verify my identity|department representative)'
+    category: "impersonation_signal"
+  - id: "impersonation_identity_hi"
+    weight: 0.8
+    regex: '(मैं .* से बोल रहा|विभाग की ओर से|आधिकारिक रूप से|अपनी पहचान सत्यापित|अधिकारी बोल रहा)'
+    category: "impersonation_signal"
