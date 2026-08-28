@@ -4,7 +4,7 @@
     "risk": "benign",
     "language": "en",
     "titleKey": "practice.benign",
-    "text": "Hello, this is Priya calling from the customer care team at Example Bank. I am calling about a routine service-quality survey on your account. I will not ask for your password, PIN, or one-time password. If you would like to verify this call, please hang up and use the official number printed on your bank card or the bank's official website."
+    "text": "Hello, this is Priya calling from the customer care team at Example Bank. I am calling about a routine service-quality survey for our records. My name is Priya Mehta and the reference for this survey is EB-2048. If you would like to verify this call, please end the conversation and use the number printed on your bank card."
   },
   {
     "id": "benign_hi",
@@ -25,7 +25,7 @@
     "risk": "medium",
     "language": "hi",
     "titleKey": "practice.medium",
-    "text": "नमस्ते, मैं टेलीकॉम विभाग से बोल रहा हूँ। आपके मोबाइल कनेक्शन के केवाईसी रिकॉर्ड में समस्या दिख रही है और इसे जल्दी ठीक नहीं किया गया तो सिम बंद हो सकती है। कृपया लाइन पर रहिए। कोई भुगतान जरूरी नहीं है और आपको ओटीपी या पिन साझा नहीं करना चाहिए।"
+    "text": "नमस्ते, टेलीकॉम विभाग ने आपके मोबाइल कनेक्शन के केवाईसी रिकॉर्ड में समस्या बताई है और रिकॉर्ड की तुरंत समीक्षा नहीं हुई तो सिम बंद हो सकती है। कृपया अपने प्रदाता के ऐप में सूचना देखें और प्रकाशित सहायता चैनल से इसकी जाँच करें।"
   },
   {
     "id": "critical_en",
