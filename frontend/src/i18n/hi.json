@@ -142,5 +142,19 @@
   "reason.money": "पैसे या संवेदनशील जानकारी की माँग",
   "reason.secrecy": "गोपनीयता या अलग-थलग करने का दबाव",
   "reason.threat": "धमकी या तुरंत करने की समय-सीमा",
-  "reason.remote": "रिमोट एक्सेस या स्क्रीन शेयर की माँग"
+  "reason.remote": "रिमोट एक्सेस या स्क्रीन शेयर की माँग",
+  "app.brand_subtitle": "Armour सुरक्षा परत",
+  "app.privacy": "प्राइवेसी मोड चालू",
+  "nav.primary": "मुख्य नेविगेशन",
+  "call.eyebrow": "लाइव सुरक्षा",
+  "call.verdict_label": "निष्कर्ष",
+  "history.eyebrow": "निजी प्रमाण रिकॉर्ड",
+  "history.start_prompt": "स्कोर इतिहास देखने के लिए सुरक्षित कॉल शुरू करें।",
+  "history.segment": "हिस्सा {{label}}",
+  "helplines.eyebrow": "विश्वसनीय सहायता चैनल",
+  "learn.eyebrow": "रुकें। पुष्टि करें। सुरक्षित रहें।",
+  "learn.go_to_card": "कार्ड {{number}} पर जाएँ",
+  "quiz.eyebrow": "करके सीखें",
+  "practice.eyebrow": "सुरक्षित अभ्यास कक्ष",
+  "contacts.eyebrow": "आपका सुरक्षा समूह"
 }

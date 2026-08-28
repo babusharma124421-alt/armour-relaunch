@@ -142,5 +142,19 @@
   "reason.money": "Money or sensitive-data request",
   "reason.secrecy": "Secrecy or isolation pressure",
   "reason.threat": "Threat or urgent deadline",
-  "reason.remote": "Remote-access or screen-share request"
+  "reason.remote": "Remote-access or screen-share request",
+  "app.brand_subtitle": "Armour safety layer",
+  "app.privacy": "Privacy mode on",
+  "nav.primary": "Primary navigation",
+  "call.eyebrow": "Live protection",
+  "call.verdict_label": "Verdict",
+  "history.eyebrow": "Private evidence trail",
+  "history.start_prompt": "Start a protected call to see score history here.",
+  "history.segment": "Segment {{label}}",
+  "helplines.eyebrow": "Trusted response channels",
+  "learn.eyebrow": "Pause. Verify. Protect.",
+  "learn.go_to_card": "Go to card {{number}}",
+  "quiz.eyebrow": "Learn by doing",
+  "practice.eyebrow": "Safe rehearsal room",
+  "contacts.eyebrow": "Your safety circle"
 }

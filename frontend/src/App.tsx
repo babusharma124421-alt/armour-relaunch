@@ -32,7 +32,7 @@ function Brand() {
       <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-sky-400/15 text-sky-300"><Shield className="h-5 w-5" aria-hidden="true" /></span>
       <span>
         <span className="block text-base font-bold tracking-tight text-white">{t('app.name')}</span>
-        <span className="hidden text-[10px] font-semibold uppercase tracking-[0.19em] text-slate-500 sm:block">Armour safety layer</span>
+        <span className="hidden text-[10px] font-semibold uppercase tracking-[0.19em] text-slate-500 sm:block">{t('app.brand_subtitle')}</span>
       </span>
     </Link>
   )
@@ -59,7 +59,7 @@ function TopBar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Brand />
         <div className="flex items-center gap-2">
-          <span className="hidden items-center gap-2 rounded-full border border-risk-safe/20 bg-risk-safe/5 px-3 py-2 text-xs font-medium text-risk-safe md:flex"><span className="h-2 w-2 rounded-full bg-risk-safe" />Privacy mode on</span>
+          <span className="hidden items-center gap-2 rounded-full border border-risk-safe/20 bg-risk-safe/5 px-3 py-2 text-xs font-medium text-risk-safe md:flex"><span className="h-2 w-2 rounded-full bg-risk-safe" />{t('app.privacy')}</span>
           <LanguageToggle />
           <Link to="/contacts" title={t('nav.contacts')} aria-label={t('nav.contacts')} className="rounded-xl border border-slate-700 bg-slate-900/60 p-2 text-slate-300 transition hover:border-sky-400/50 hover:text-white"><Settings2 className="h-5 w-5" aria-hidden="true" /></Link>
         </div>
@@ -73,7 +73,7 @@ function BottomNavigation() {
   const location = useLocation()
   const bottomItems = navigation.filter((item) => item.desktop).slice(0, 4)
   return (
-    <nav aria-label="Primary navigation" className="fixed bottom-0 left-0 right-0 z-30 border-t border-slate-800/90 bg-slate-950/90 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl sm:hidden">
+    <nav aria-label={t('nav.primary')} className="fixed bottom-0 left-0 right-0 z-30 border-t border-slate-800/90 bg-slate-950/90 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl sm:hidden">
       <div className="mx-auto grid max-w-md grid-cols-4 gap-1">
         {bottomItems.map((item) => {
           const Icon = item.icon
@@ -89,7 +89,7 @@ function DesktopNavigation() {
   const { t } = useTranslation()
   return (
     <aside className="hidden w-52 shrink-0 lg:block">
-      <nav className="sticky top-24 space-y-1" aria-label="Primary navigation">
+      <nav className="sticky top-24 space-y-1" aria-label={t('nav.primary')}>
         {navigation.filter((item) => item.desktop).map((item) => {
           const Icon = item.icon
           return <NavLink key={item.to} to={item.to} className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold transition ${isActive ? 'bg-sky-400/10 text-sky-300' : 'text-slate-400 hover:bg-slate-900 hover:text-white'}`}><Icon className="h-4 w-4" aria-hidden="true" />{t(item.labelKey)}</NavLink>
