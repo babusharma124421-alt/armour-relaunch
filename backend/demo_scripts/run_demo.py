@@ -118,7 +118,10 @@ async def run(script_name: str, base_url: str) -> None:
     final_payload: dict[str, Any] = {}
     async with websockets.connect(websocket_url, max_size=2**20) as socket:
         for index, chunk in enumerate(chunks, start=1):
-            await socket.send(make_demo_wav(chunk))
+            # A rolling text marker keeps the offline demo equivalent to the
+            # sliding transcript context used by the live intent pipeline.
+            rolling_chunk = " ".join(chunks[:index])
+            await socket.send(make_demo_wav(rolling_chunk))
             raw_payload = await socket.recv()
             if isinstance(raw_payload, bytes):
                 raw_payload = raw_payload.decode("utf-8")
