@@ -211,7 +211,15 @@ class VoiceAuthenticityService:
             waveform, sample_rate = torchaudio.load(io.BytesIO(audio_bytes))
             waveform = waveform.mean(dim=0, keepdim=True)
         except Exception:
-            samples, sample_rate = self._read_wave_with_stdlib(audio_bytes)
+            try:
+                samples, sample_rate = self._read_wave_with_stdlib(audio_bytes)
+            except (OSError, EOFError, ValueError, wave.Error):
+                # Raw PCM chunks are interpreted as signed 16-bit mono at 16 kHz.
+                usable_length = len(audio_bytes) - (len(audio_bytes) % 2)
+                if usable_length == 0:
+                    raise ValueError("Audio chunk contains no decodable samples")
+                samples = np.frombuffer(audio_bytes[:usable_length], dtype=np.int16).astype(np.float32) / 32768.0
+                sample_rate = SAMPLE_RATE
             waveform = torch.from_numpy(samples).float().unsqueeze(0)
         if sample_rate != SAMPLE_RATE:
             if torchaudio is not None:
