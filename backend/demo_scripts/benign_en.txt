@@ -1,0 +1,6 @@
+# FICTIONAL DEMO SCRIPT — FOR TESTING ONLY
+# NOT A REAL CALL. DO NOT USE AS TRAINING DATA.
+
+Hello, this is Priya calling from the customer care team at Example Bank. I am calling about a routine service-quality survey for our records. My name is Priya Mehta and the reference for this survey is EB-2048.
+
+If you would like to verify this call, please end the conversation and use the number printed on your bank card. I can also provide the survey reference for your records. Thank you for your time, and have a safe day.

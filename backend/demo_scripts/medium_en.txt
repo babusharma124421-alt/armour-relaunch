@@ -1,0 +1,6 @@
+# FICTIONAL DEMO SCRIPT — FOR TESTING ONLY
+# NOT A REAL CALL. DO NOT USE AS TRAINING DATA.
+
+Hello, the telecom department has flagged the full KYC record for your mobile connection. Our system says the SIM may be deactivated if the record is not reviewed immediately, within one hour.
+
+Please review the notice in your provider's app and use the provider's published support channel to check it. The contact centre can explain the process, and you can decide what to do after you have verified the notice independently.
