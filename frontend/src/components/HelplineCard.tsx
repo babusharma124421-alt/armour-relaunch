@@ -30,7 +30,7 @@ export function HelplineCard({ helpline }: HelplineCardProps) {
     <article className="glass-panel flex h-full flex-col rounded-2xl p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="eyebrow">{helpline.category.replace(/_/g, ' ')}</p>
+          <p className="eyebrow">{t(`helplines.category_${helpline.category}`, { defaultValue: t('helplines.category_unknown') })}</p>
           <h3 className="mt-2 text-lg font-semibold text-white">{helpline.name}</h3>
         </div>
         <div className="rounded-xl bg-sky-500/10 p-2 text-sky-300"><PhoneCall className="h-5 w-5" aria-hidden="true" /></div>

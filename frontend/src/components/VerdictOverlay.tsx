@@ -92,7 +92,7 @@ export function VerdictOverlay({ verdict, score, reasons, onClose, onEndCall, on
           <div className="grid gap-2 sm:grid-cols-2">
             <button type="button" onClick={onEndCall} className="primary-button bg-red-500 text-white hover:bg-red-400"><PhoneCall className="h-4 w-4" />{t('action.end_call')}</button>
             <a href="https://cybercrime.gov.in" target="_blank" rel="noreferrer" className="secondary-button"><ExternalLink className="h-4 w-4" />{t('action.verify')}</a>
-            <a href="tel:1930" className="secondary-button" onClick={onClose}><PhoneCall className="h-4 w-4" />{t('action.report_1930')}</a>
+            <a className={`secondary-button ${locked ? 'pointer-events-none opacity-50' : ''}`} aria-disabled={locked} href="tel:1930" onClick={(event) => { if (locked) { event.preventDefault(); return } onClose() }}><PhoneCall className="h-4 w-4" />{t('action.report_1930')}</a>
             <button type="button" onClick={onAlert} disabled={alertSent || locked} className="secondary-button border-red-400/40 text-red-200 disabled:opacity-50"><ShieldX className="h-4 w-4" />{alertSent ? t('action.alert_sent') : t('action.alert_contacts')}</button>
           </div>
           <p className="text-center text-xs text-slate-500">{verdictLabel(verdict, t)} · {t('verdict.score', { score: Math.round(score) })}</p>

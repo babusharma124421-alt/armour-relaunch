@@ -88,7 +88,7 @@ export function CallMonitor() {
           <div className="space-y-5">
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl border border-slate-800 bg-slate-950/45 p-4"><p className="text-xs uppercase tracking-wider text-slate-500">{t('call.detected_language')}</p><p className="mt-2 text-lg font-semibold uppercase text-white">{stream.detectedLanguage === 'unknown' ? t('common.unknown') : stream.detectedLanguage}</p></div>
-              <div className="rounded-2xl border border-slate-800 bg-slate-950/45 p-4"><p className="text-xs uppercase tracking-wider text-slate-500">{t('call.verdict_label')}</p><p className="mt-2 text-lg font-semibold text-white">{stream.verdict ? t(`verdict.${stream.verdict.toLowerCase()}`) : '—'}</p></div>
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/45 p-4"><p className="text-xs uppercase tracking-wider text-slate-500">{t('call.verdict_label')}</p><p className="mt-2 text-lg font-semibold text-white">{stream.verdict ? t(`verdict.${stream.verdict.toLowerCase()}`) : t('common.not_available')}</p></div>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/45 p-4">
               <div className="flex items-center justify-between gap-4"><h2 className="text-sm font-semibold text-slate-200">{t('call.reason_heading')}</h2><span className="text-xs text-slate-500">{stream.reasons.length}/5</span></div>

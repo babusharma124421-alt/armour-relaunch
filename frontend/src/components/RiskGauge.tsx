@@ -26,7 +26,7 @@ export function RiskGauge({ score, verdict, size = 320 }: RiskGaugeProps) {
   const offset = circumference - (safeScore / 100) * circumference
 
   return (
-    <div className="relative mx-auto aspect-square" style={{ width: size, maxWidth: '100%' }} aria-label={`${t('call.score_label')}: ${Math.round(safeScore)} out of 100`}>
+    <div className="relative mx-auto aspect-square" style={{ width: size, maxWidth: '100%' }} aria-label={t('call.score_aria', { score: Math.round(safeScore) })}>
       <svg className="h-full w-full -rotate-90" viewBox={`0 0 ${size} ${size}`} role="img">
         <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#1e293b" strokeWidth={strokeWidth} />
         <circle

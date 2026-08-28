@@ -32,13 +32,33 @@ const patternLessons: Record<string, string> = {
   video_call_trap_hi: 'digital_arrest',
   sim_deactivation_en: 'urgency',
   sim_deactivation_hi: 'urgency',
+  urgency_deadline_en: 'urgency',
+  urgency_deadline_hi: 'urgency',
 }
 
-function practicePayloads(script: PracticeScript): RiskPayload[] {
+const patternLabelKeys: Record<string, string> = {
+  authority_claim_en: 'practice.pattern_authority',
+  authority_claim_hi: 'practice.pattern_authority',
+  aadhaar_crime_link_en: 'practice.pattern_false_accusation',
+  aadhaar_crime_link_hi: 'practice.pattern_false_accusation',
+  arrest_threat_en: 'practice.pattern_threat',
+  arrest_threat_hi: 'practice.pattern_threat',
+  secrecy_request_en: 'practice.pattern_secrecy',
+  secrecy_request_hi: 'practice.pattern_secrecy',
+  money_transfer_en: 'practice.pattern_money',
+  money_transfer_hi: 'practice.pattern_money',
+  sim_deactivation_en: 'practice.pattern_telecom',
+  sim_deactivation_hi: 'practice.pattern_telecom',
+  urgency_deadline_en: 'practice.pattern_urgency',
+  urgency_deadline_hi: 'practice.pattern_urgency',
+}
+
+function practicePayloads(script: PracticeScript, detectedReason: string, clearReason: string): RiskPayload[] {
   const score = script.risk === 'critical' ? 91 : script.risk === 'medium' ? 47 : 10
+  const suffix = `_${script.language}`
   const patterns = script.risk === 'critical'
-    ? ['authority_claim_en', 'aadhaar_crime_link_en', 'arrest_threat_en', 'secrecy_request_en', 'money_transfer_en']
-    : script.risk === 'medium' ? ['sim_deactivation_en', 'urgency_deadline_en'] : []
+    ? [`authority_claim${suffix}`, `aadhaar_crime_link${suffix}`, `arrest_threat${suffix}`, `secrecy_request${suffix}`, `money_transfer${suffix}`]
+    : script.risk === 'medium' ? [`sim_deactivation${suffix}`, `urgency_deadline${suffix}`] : []
   const language = script.language
   return [0.35, 0.62, 0.82, 1].map((progress) => {
     const finalScore = Math.round(score * progress)
@@ -51,7 +71,7 @@ function practicePayloads(script: PracticeScript): RiskPayload[] {
       behavior_score: Math.round(finalScore * 0.85),
       final_score: finalScore,
       verdict,
-      reasons: patterns.length > 0 ? ['This fictional call contains recognizable social-engineering signals.'] : ['No strong scam indicators were detected in this practice script.'],
+      reasons: patterns.length > 0 ? [detectedReason] : [clearReason],
       matched_patterns: patterns,
       transcript_snippet: script.text.slice(-280),
       detected_language: language,
@@ -67,7 +87,10 @@ export function ScamPractice() {
   const [selectedId, setSelectedId] = useState(localizedScripts[0]?.id ?? 'benign_en')
   const [started, setStarted] = useState(false)
   const selected = localizedScripts.find((script) => script.id === selectedId) ?? localizedScripts[0] ?? allScripts[0]
-  const payloads = useMemo(() => practicePayloads(selected), [selected])
+  const payloads = useMemo(
+    () => practicePayloads(selected, t('practice.fallback_detected'), t('practice.fallback_clear')),
+    [selected, t],
+  )
   const stream = useCallStream({ isPractice: true, practiceScript: selected.text, practicePayloads: payloads })
   const running = stream.status === 'requesting_permission' || stream.status === 'listening' || stream.status === 'analyzing'
   const complete = started && !running && stream.currentScore > 0
@@ -87,7 +110,7 @@ export function ScamPractice() {
       <div className="mb-7"><p className="eyebrow text-yellow-300">{t('practice.eyebrow')}</p><h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">{t('practice.title')}</h1><p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">{t('practice.subtitle')}</p></div>
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(320px,1.1fr)]">
         <section className="glass-panel rounded-3xl p-5 sm:p-7"><label htmlFor="practice-script" className="eyebrow">{t('practice.choose')}</label><select id="practice-script" value={selected.id} onChange={(event) => { setSelectedId(event.target.value); setStarted(false); stream.stopSession() }} className="mt-3 w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-sm font-semibold text-white"><option value={selected.id}>{t(selected.titleKey)}</option>{localizedScripts.filter((script) => script.id !== selected.id).map((script) => <option key={script.id} value={script.id}>{t(script.titleKey)}</option>)}</select><div className="mt-5 rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-4"><p className="text-xs font-semibold uppercase tracking-wider text-yellow-200">{t(selected.titleKey)}</p><p className="mt-3 text-sm leading-7 text-slate-300">{selected.text}</p></div><p className="mt-4 text-xs leading-5 text-slate-500">{t('practice.note')}</p><button type="button" onClick={running ? stream.stopSession : start} className={`mt-6 w-full rounded-xl px-4 py-3 font-bold transition ${running ? 'border border-red-400/40 bg-red-500/10 text-red-200' : 'bg-yellow-400 text-slate-950 hover:bg-yellow-300'}`}>{running ? <span className="inline-flex items-center gap-2"><RotateCcw className="h-4 w-4" />{t('call.stop')}</span> : started && complete ? <span className="inline-flex items-center gap-2"><Play className="h-4 w-4" />{t('practice.restart')}</span> : <span className="inline-flex items-center gap-2"><Play className="h-4 w-4" />{t('practice.start')}</span>}</button></section>
-        <section className="glass-panel rounded-3xl p-5 sm:p-7"><div className="flex items-center justify-between gap-3"><div><p className="eyebrow">{running ? t('practice.running') : complete ? t('practice.complete') : t('call.idle')}</p><h2 className="mt-2 text-xl font-semibold text-white">{t('call.score_label')}</h2></div><span className={`rounded-full px-3 py-1 text-xs font-bold ${stream.verdict === 'CRITICAL' ? 'bg-risk-critical/15 text-risk-critical' : stream.verdict === 'SUSPICIOUS' ? 'bg-risk-suspicious/15 text-risk-suspicious' : 'bg-risk-safe/15 text-risk-safe'}`}>{stream.verdict ? t(`verdict.${stream.verdict.toLowerCase()}`) : '—'}</span></div><div className="mt-6 flex justify-center"><RiskGauge score={stream.currentScore} verdict={stream.verdict} size={260} /></div>{complete && <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/50 p-4"><div className="flex items-center gap-2 text-sm font-semibold text-white"><CheckCircle2 className="h-4 w-4 text-risk-safe" />{t('practice.triggered')}</div>{stream.matchedPatterns.length === 0 ? <p className="mt-3 text-sm text-slate-500">{t('practice.triggered_empty')}</p> : <ul className="mt-3 space-y-2">{stream.matchedPatterns.map((pattern) => <li key={pattern} className="flex items-center justify-between gap-3 rounded-xl bg-slate-900 px-3 py-2 text-sm text-slate-300"><span>{pattern.replace(/_/g, ' ')}</span>{patternLessons[pattern] && <Link to={`/learn#${patternLessons[pattern]}`} className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-sky-300 hover:text-sky-200">{t('practice.view_lesson')}<ArrowRight className="h-3 w-3" /></Link>}</li>)}</ul>}</div>}</section>
+        <section className="glass-panel rounded-3xl p-5 sm:p-7"><div className="flex items-center justify-between gap-3"><div><p className="eyebrow">{running ? t('practice.running') : complete ? t('practice.complete') : t('call.idle')}</p><h2 className="mt-2 text-xl font-semibold text-white">{t('call.score_label')}</h2></div><span className={`rounded-full px-3 py-1 text-xs font-bold ${stream.verdict === 'CRITICAL' ? 'bg-risk-critical/15 text-risk-critical' : stream.verdict === 'SUSPICIOUS' ? 'bg-risk-suspicious/15 text-risk-suspicious' : 'bg-risk-safe/15 text-risk-safe'}`}>{stream.verdict ? t(`verdict.${stream.verdict.toLowerCase()}`) : t('common.not_available')}</span></div><div className="mt-6 flex justify-center"><RiskGauge score={stream.currentScore} verdict={stream.verdict} size={260} /></div>{complete && <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/50 p-4"><div className="flex items-center gap-2 text-sm font-semibold text-white"><CheckCircle2 className="h-4 w-4 text-risk-safe" />{t('practice.triggered')}</div>{stream.matchedPatterns.length === 0 ? <p className="mt-3 text-sm text-slate-500">{t('practice.triggered_empty')}</p> : <ul className="mt-3 space-y-2">{stream.matchedPatterns.map((pattern) => <li key={pattern} className="flex items-center justify-between gap-3 rounded-xl bg-slate-900 px-3 py-2 text-sm text-slate-300"><span>{t(patternLabelKeys[pattern] ?? 'practice.pattern_unknown')}</span>{patternLessons[pattern] && <Link to={`/learn#${patternLessons[pattern]}`} className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-sky-300 hover:text-sky-200">{t('practice.view_lesson')}<ArrowRight className="h-3 w-3" /></Link>}</li>)}</ul>}</div>}</section>
       </div>
     </div>
   )

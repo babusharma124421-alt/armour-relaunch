@@ -43,9 +43,9 @@ export function PanicButton({ sessionId, onSent }: PanicButtonProps) {
   }
 
   return (
-    <button type="button" onClick={() => void handlePanic()} disabled={sending} aria-label={t('panic.title')} className="fixed bottom-24 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-red-300/40 bg-red-500 px-4 py-3 text-sm font-bold text-white shadow-xl shadow-red-950/40 transition hover:bg-red-400 disabled:cursor-wait disabled:opacity-70 sm:bottom-8 sm:right-8">
+    <button type="button" onClick={() => void handlePanic()} disabled={sending} aria-label={t('panic.title')} className="fixed bottom-24 right-5 z-[60] inline-flex items-center gap-2 rounded-full border border-red-300/40 bg-red-500 px-4 py-3 text-sm font-bold text-white shadow-xl shadow-red-950/40 transition hover:bg-red-400 disabled:cursor-wait disabled:opacity-70 sm:bottom-8 sm:right-8">
       <Siren className="h-4 w-4" aria-hidden="true" />
-      <span>{sending ? '…' : t('panic.button')}</span>
+      <span>{sending ? t('common.loading') : t('panic.button')}</span>
     </button>
   )
 }

@@ -363,7 +363,9 @@ async def panic(
     )
     notified_count = sum(result is True for result in results)
     if contacts:
-        await app.state.repository.update_session(payload.session_id, {"alert_sent": notified_count > 0})
+        # The flag records that an alert run was initiated for this session;
+        # delivery success is reported separately in notified_count.
+        await app.state.repository.update_session(payload.session_id, {"alert_sent": True})
     return PanicResponse(notified_count=notified_count, success=notified_count > 0)
 
 

@@ -45,7 +45,7 @@ function languageForBackend(language: string): string {
   return language.toLowerCase().startsWith('hi') ? 'hi' : 'en'
 }
 
-function fallbackPracticePayloads(script: string): RiskPayload[] {
+function fallbackPracticePayloads(script: string, detectedReason: string, clearReason: string): RiskPayload[] {
   const normalized = script.toLowerCase()
   const critical = /(cbi|aadhaar|money laundering|arrest|otp|safe account|गिरफ्तार|ओटीपी)/u.test(normalized)
   const medium = /(sim|deactivat|kyc|सिम|केवाईसी)/u.test(normalized)
@@ -66,7 +66,7 @@ function fallbackPracticePayloads(script: string): RiskPayload[] {
       behavior_score: Math.round(score * 0.8),
       final_score: score,
       verdict: stepVerdict,
-      reasons: matchedPatterns.length > 0 ? ['This fictional script contains recognizable social-engineering signals.'] : ['No strong scam indicators were detected in this practice script.'],
+      reasons: matchedPatterns.length > 0 ? [detectedReason] : [clearReason],
       matched_patterns: matchedPatterns,
       transcript_snippet: script.slice(-280),
       detected_language: /[\u0900-\u097f]/u.test(script) ? 'hi' : 'en',
@@ -131,7 +131,9 @@ export function useCallStream(options: UseCallStreamOptions = {}) {
   }, [setSafeState])
 
   const replayPractice = useCallback((sessionId: string) => {
-    const payloads = practicePayloads.length > 0 ? practicePayloads : fallbackPracticePayloads(practiceScript)
+    const payloads = practicePayloads.length > 0
+      ? practicePayloads
+      : fallbackPracticePayloads(practiceScript, t('practice.fallback_detected'), t('practice.fallback_clear'))
     let index = 0
     setSafeState({ status: 'listening', error: null })
     practiceTimerRef.current = window.setInterval(() => {
@@ -150,7 +152,7 @@ export function useCallStream(options: UseCallStreamOptions = {}) {
         window.setTimeout(() => setSafeState({ status: 'idle' }), 450)
       }
     }, 900)
-  }, [applyPayload, practicePayloads, practiceScript, setSafeState])
+  }, [applyPayload, practicePayloads, practiceScript, setSafeState, t])
 
   const startInternal = useCallback(async (isReconnect: boolean) => {
     stoppedRef.current = false

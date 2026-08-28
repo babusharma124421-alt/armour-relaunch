@@ -47,7 +47,7 @@ function LanguageToggle() {
   return (
     <button type="button" onClick={toggleLanguage} title={t('common.language')} className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 px-3 py-2 text-xs font-bold text-slate-300 transition hover:border-sky-400/50 hover:text-white">
       <Languages className="h-4 w-4 text-sky-300" aria-hidden="true" />
-      {current === 'en' ? 'EN' : 'HI'}
+      {current === 'en' ? t('common.english') : t('common.hindi')}
     </button>
   )
 }
