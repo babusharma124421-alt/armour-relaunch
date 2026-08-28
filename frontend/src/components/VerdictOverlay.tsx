@@ -55,6 +55,9 @@ export function VerdictOverlay({ verdict, score, reasons, onClose, onEndCall, on
         <button type="button" onClick={onAlert} disabled={alertSent} className="secondary-button border-yellow-500/30 px-3 py-2 text-xs text-yellow-100">
           {alertSent ? t('action.alert_sent') : t('action.alert_contacts')}
         </button>
+        <button type="button" onClick={onClose} aria-label={t('action.close')} className="rounded-xl p-2 text-yellow-100/70 transition hover:bg-yellow-200/10 hover:text-yellow-100">
+          <X className="h-4 w-4" aria-hidden="true" />
+        </button>
       </div>
     )
   }
