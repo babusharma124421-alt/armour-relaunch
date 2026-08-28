@@ -1,0 +1,58 @@
+[
+  {
+    "name": "National Cyber Crime Helpline",
+    "number": "1930",
+    "category": "cybercrime",
+    "description": "Report online financial fraud and cybercrime incidents.",
+    "available_hours": "24x7",
+    "locale": "all"
+  },
+  {
+    "name": "National Cyber Crime Reporting Portal",
+    "number": "cybercrime.gov.in",
+    "category": "cybercrime",
+    "description": "File an online cybercrime complaint and track its status.",
+    "available_hours": "Online portal",
+    "locale": "all"
+  },
+  {
+    "name": "RBI Banking Ombudsman",
+    "number": "14440",
+    "category": "banking",
+    "description": "Get help with unresolved banking service complaints.",
+    "available_hours": "Business hours",
+    "locale": "all"
+  },
+  {
+    "name": "Police Emergency",
+    "number": "100",
+    "category": "emergency",
+    "description": "Immediate police assistance in an emergency.",
+    "available_hours": "24x7",
+    "locale": "all"
+  },
+  {
+    "name": "National Consumer Helpline",
+    "number": "1800-11-4000",
+    "category": "consumer",
+    "description": "Consumer protection guidance and complaint support.",
+    "available_hours": "08:00–20:00",
+    "locale": "all"
+  },
+  {
+    "name": "Childline India",
+    "number": "1098",
+    "category": "child_safety",
+    "description": "Emergency support for children in distress.",
+    "available_hours": "24x7",
+    "locale": "all"
+  },
+  {
+    "name": "Elderline",
+    "number": "14567",
+    "category": "senior_citizens",
+    "description": "Support and guidance for senior citizens.",
+    "available_hours": "08:00–20:00",
+    "locale": "all"
+  }
+]
